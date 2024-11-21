@@ -1,6 +1,6 @@
 Need an application from Twitch (not an extension) (https://dev.twitch.tv/) and a Spotify application (https://developer.spotify.com/)
 
-HOW TO GET:
+##HOW TO GET:
 
 Twitch OAuth Token (Access Token): https://id.twitch.tv/oauth2/authorize?response_type=token&client_id=<YOUR_CLIENT_ID>&redirect_uri=http://localhost&scope=chat:read+chat:write+channel:read:redemptions (replace <YOUR_CLIENT_ID> to the client ID Twitch gives you.)
 
