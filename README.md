@@ -7,9 +7,11 @@
 - A Twitch account and registered application (https://dev.twitch.tv/)
 - A Spotify developer application. (https://developer.spotify.com/)
 
-HOW TO GET:
+## How to get
 
-Twitch OAuth Token (Access Token): https://id.twitch.tv/oauth2/authorize?response_type=token&client_id=<YOUR_CLIENT_ID>&redirect_uri=http://localhost&scope=chat:read+chat:write+channel:read:redemptions (replace <YOUR_CLIENT_ID> to the client ID Twitch gives you.)
+Twitch OAuth Token (Access Token): 
+https://id.twitch.tv/oauth2/authorize?response_type=token&client_id <YOUR_CLIENT_ID>&redirect_uri=http://localhost&scope=chat:read+chat:write+channel:read:redemptions 
+(replace <YOUR_CLIENT_ID> to the client ID Twitch gives you.)
 
 Twitch User ID: https://www.streamweasels.com/tools/convert-twitch-username-%20to-user-id/
 
