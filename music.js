@@ -16,8 +16,11 @@ const USER_ID = process.env.USER_ID; // Twitch User ID
 const SPOTIFY_CLIENT_ID = process.env.SPOTIFY_CLIENT_ID;
 const SPOTIFY_CLIENT_SECRET = process.env.SPOTIFY_CLIENT_SECRET;
 const SPOTIFY_REFRESH_TOKEN = process.env.SPOTIFY_REFRESH_TOKEN; // Spotify refresh token
-const PLAYLIST_1_URI = process.env.PLAYLIST_1_URI; // Spotify playlist URI 1
-const PLAYLIST_2_URI = process.env.PLAYLIST_2_URI; // Spotify playlist URI 2
+const PLAYLISTS = [
+    process.env.PLAYLIST_1_URI,
+    process.env.PLAYLIST_2_URI,
+    process.env.PLAYLIST_3_URI // Add more playlists here
+];
 
 // Initialize Spotify API
 const spotifyApi = new SpotifyWebApi({
@@ -29,8 +32,8 @@ const spotifyApi = new SpotifyWebApi({
 // Set Spotify Refresh Token
 spotifyApi.setRefreshToken(SPOTIFY_REFRESH_TOKEN);
 
-// Keep track of the current playlist
-let currentPlaylist = PLAYLIST_1_URI;
+// Keep track of the current playlist index
+let currentPlaylistIndex = 0;
 
 class TwitchBot {
     constructor() {
@@ -91,6 +94,36 @@ class TwitchBot {
         console.log("Listening for channel point redemptions...");
     }
 
+    async swapPlaylists() {
+        try {
+            const data = await spotifyApi.refreshAccessToken();
+            spotifyApi.setAccessToken(data.body['access_token']);
+
+            // Get the next playlist in the rotation
+            currentPlaylistIndex = (currentPlaylistIndex + 1) % PLAYLISTS.length;
+            const newPlaylist = PLAYLISTS[currentPlaylistIndex];
+
+            await spotifyApi.play({
+                context_uri: newPlaylist
+            });
+
+            console.log(`Switched to playlist: ${newPlaylist}`);
+            await this.chatClient.say(
+                CHANNEL_NAME,
+                `Switched to a new playlist! 🎵`
+            );
+        } catch (error) {
+            console.error(`Error swapping playlists: ${error.message}`);
+            if (error.response) {
+                console.error(`Spotify API error details:`, error.response.body);
+            }
+            await this.chatClient.say(
+                CHANNEL_NAME,
+                `Unable to swap playlists. Please try again later.`
+            );
+        }
+    }
+
     async addSongToQueue(query, user) {
         try {
             console.log(`Received Spotify link: ${query}`);
@@ -131,36 +164,6 @@ class TwitchBot {
             await this.chatClient.say(
                 CHANNEL_NAME,
                 `@${user}, there was an error adding your song to the queue. Please try again later.`
-            );
-        }
-    }
-
-    async swapPlaylists() {
-        try {
-            const data = await spotifyApi.refreshAccessToken();
-            spotifyApi.setAccessToken(data.body['access_token']);
-
-            const newPlaylist = currentPlaylist === PLAYLIST_1_URI ? PLAYLIST_2_URI : PLAYLIST_1_URI;
-
-            await spotifyApi.play({
-                context_uri: newPlaylist
-            });
-
-            console.log(`Switched to playlist: ${newPlaylist}`);
-            currentPlaylist = newPlaylist;
-
-            await this.chatClient.say(
-                CHANNEL_NAME,
-                `Switched to a new playlist! 🎵`
-            );
-        } catch (error) {
-            console.error(`Error swapping playlists: ${error.message}`);
-            if (error.response) {
-                console.error(`Spotify API error details:`, error.response.body);
-            }
-            await this.chatClient.say(
-                CHANNEL_NAME,
-                `Unable to swap playlists. Please try again later.`
             );
         }
     }
