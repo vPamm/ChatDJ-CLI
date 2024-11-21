@@ -1,5 +1,3 @@
-A twitch bot that will automatically swap between playlists that are currently playing and will add requests (from Spotify) into the now playing queue.
-
 Need an application from Twitch (not an extension) (https://dev.twitch.tv/) and a Spotify application (https://developer.spotify.com/)
 
 HOW TO GET:
