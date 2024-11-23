@@ -1,6 +1,8 @@
-# ChatDJ
+# ChatDJ 
 
 A Twitch bot for managing Spotify playlists and handling song requests via channel point redemptions.
+
+[![Node.js CI](https://github.com/vPamm/ChatDJ/actions/workflows/node.js.yml/badge.svg?branch=main)](https://github.com/vPamm/ChatDJ/actions/workflows/node.js.yml)
 
 ## Features
 
