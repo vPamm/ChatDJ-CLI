@@ -4,8 +4,9 @@
 
 ## Requirements
 - Node.js (version 16+ recommended)
-- A Twitch account and registered application (https://dev.twitch.tv/)
+- A Twitch Affilate/Partner account (for channel point redemption) and registered application (https://dev.twitch.tv/)
 - A Spotify developer application. (https://developer.spotify.com/)
+
 
 ## How to get
 
