@@ -18,4 +18,11 @@ Twitch User ID: https://www.streamweasels.com/tools/convert-twitch-username-%20t
 
 Spotify refresh token: https://github.com/alecchendev/spotify-refresh-token (use these scopes: https://i.imgur.com/wsx6Hlf.png)
 
+### **Testing the Setup**
+- Install the package locally or globally.
+- Create a `.env` file with valid credentials.
+- Run the command to verify it works as expected.
+
+Let me know if you encounter any issues or need further assistance! 🚀
+
 

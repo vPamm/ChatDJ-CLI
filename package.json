@@ -4,11 +4,12 @@
   "description": "A twitch bot that will automatically swap between playlists that are currently playing and will add requests (from spotify) into the now playing queue.",
   "main": "music.js",
   "scripts": {
-    "test": "echo \"No test specified\" && exit 0"
+    "test": "echo \"No test specified\" && exit 0",
+    "start": "node music.js",
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "vPam",
+  "license": "MIT",
   "dependencies": {
     "dotenv": "^16.4.5",
     "spotify-web-api-node": "^5.0.2",
