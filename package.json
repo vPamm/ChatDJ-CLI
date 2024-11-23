@@ -3,9 +3,12 @@
   "version": "1.0.0",
   "description": "A twitch bot that will automatically swap between playlists that are currently playing and will add requests (from spotify) into the now playing queue.",
   "main": "music.js",
+  "bin": {
+    "chatdj": "./music.js"
+  },
   "scripts": {
     "test": "echo \"No test specified\" && exit 0",
-    "start": "node music.js",
+    "start": "node music.js"
   },
   "keywords": [],
   "author": "vPam",

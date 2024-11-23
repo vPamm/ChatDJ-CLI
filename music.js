@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 require('dotenv').config();
 const WebSocket = require('ws');
 const SpotifyWebApi = require('spotify-web-api-node');
