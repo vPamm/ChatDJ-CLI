@@ -16,6 +16,8 @@ const USER_ID = process.env.USER_ID; // Twitch User ID
 const SPOTIFY_CLIENT_ID = process.env.SPOTIFY_CLIENT_ID;
 const SPOTIFY_CLIENT_SECRET = process.env.SPOTIFY_CLIENT_SECRET;
 const SPOTIFY_REFRESH_TOKEN = process.env.SPOTIFY_REFRESH_TOKEN; // Spotify refresh token
+const SWAP_PLAYLISTS_REDEMPTION = process.env.SWAP_PLAYLISTS_REDEMPTION;
+const SONG_REQUEST_REDEMPTION = process.env.SONG_REQUEST_REDEMPTION;
 const PLAYLISTS = [
     process.env.PLAYLIST_1_URI,
     process.env.PLAYLIST_2_URI,
@@ -172,19 +174,19 @@ class TwitchBot {
         if (message.type === 'MESSAGE') {
             const topic = message.data.topic;
             const payload = JSON.parse(message.data.message);
-
+    
             if (topic.startsWith(`channel-points-channel-v1.`)) {
                 const user = payload.data.redemption.user.display_name;
                 const reward = payload.data.redemption.reward.title;
-
+    
                 console.log(`[REWARD REDEEMED] ${user} redeemed: ${reward}`);
-
-                if (reward === "Swap Playlists") {
+    
+                if (reward === SWAP_PLAYLISTS_REDEMPTION) {
                     console.log("Swapping playlists...");
                     this.swapPlaylists();
                 }
-
-                if (reward === "Song Request") {
+    
+                if (reward === SONG_REQUEST_REDEMPTION) {
                     const spotifyLink = payload.data.redemption.user_input;
                     console.log(`Song request by ${user}: ${spotifyLink}`);
                     this.addSongToQueue(spotifyLink, user);
