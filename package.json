@@ -1,5 +1,5 @@
 {
-  "name": "chatdj",
+  "name": "chatdj-cli",
   "version": "1.0.1",
   "description": "A twitch bot that will automatically swap between playlists that are currently playing and will add requests (from spotify) into the now playing queue.",
   "main": "music.js",

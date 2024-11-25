@@ -3,6 +3,7 @@ require('dotenv').config();
 const WebSocket = require('ws');
 const SpotifyWebApi = require('spotify-web-api-node');
 const tmi = require('tmi.js');
+const express = require('express'); 
 
 // Global error handler
 process.on('unhandledRejection', (reason, promise) => {
@@ -24,6 +25,77 @@ const PLAYLISTS = [
     process.env.PLAYLIST_2_URI,
     process.env.PLAYLIST_3_URI // Add more playlists here
 ];
+
+// Initialize Express server
+app.get('/api/current_track', async (req, res) => {
+    try {
+        const data = await spotifyApi.refreshAccessToken();
+        spotifyApi.setAccessToken(data.body['access_token']);
+
+        const trackData = await spotifyApi.getMyCurrentPlayingTrack();
+        if (trackData.body && trackData.body.item) {
+            res.json({
+                name: trackData.body.item.name,
+                artist: trackData.body.item.artists.map((artist) => artist.name).join(', '),
+                album: trackData.body.item.album.name,
+            });
+        } else {
+            res.status(404).json({ error: 'No track is currently playing.' });
+        }
+    } catch (error) {
+        console.error('Error getting current track:', error.message);
+        res.status(500).json({ error: 'Failed to get current track.' });
+    }
+});
+
+app.post('/api/playback', async (req, res) => {
+    try {
+        const { action } = req.body;
+        const data = await spotifyApi.refreshAccessToken();
+        spotifyApi.setAccessToken(data.body['access_token']);
+
+        if (action === 'play') {
+            await spotifyApi.play();
+        } else if (action === 'pause') {
+            await spotifyApi.pause();
+        }
+
+        res.json({ status: 'success' });
+    } catch (error) {
+        console.error('Error toggling playback:', error.message);
+        res.status(500).json({ error: 'Failed to toggle playback.' });
+    }
+});
+
+app.post('/api/next', async (req, res) => {
+    try {
+        const data = await spotifyApi.refreshAccessToken();
+        spotifyApi.setAccessToken(data.body['access_token']);
+        await spotifyApi.skipToNext();
+        res.json({ status: 'success' });
+    } catch (error) {
+        console.error('Error skipping to next track:', error.message);
+        res.status(500).json({ error: 'Failed to skip to next track.' });
+    }
+});
+
+app.post('/api/queue', async (req, res) => {
+    try {
+        const { uri } = req.body;
+        const data = await spotifyApi.refreshAccessToken();
+        spotifyApi.setAccessToken(data.body['access_token']);
+        await spotifyApi.addToQueue(uri);
+        res.json({ status: 'success' });
+    } catch (error) {
+        console.error('Error adding track to queue:', error.message);
+        res.status(500).json({ error: 'Failed to add track to queue.' });
+    }
+});
+
+// Start the Express server
+app.listen(5000, () => {
+    console.log('Music bot API server is running on http://localhost:5000');
+});
 
 // Initialize Spotify API
 const spotifyApi = new SpotifyWebApi({
