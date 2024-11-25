@@ -84,9 +84,9 @@ Spotify refresh token: https://github.com/alecchendev/spotify-refresh-token (use
 | `SPOTIFY_CLIENT_ID`         | Spotify Developer Application client ID.                 |
 | `SPOTIFY_CLIENT_SECRET`     | Spotify Developer Application client secret.             |
 | `SPOTIFY_REFRESH_TOKEN`     | Spotify refresh token for obtaining access tokens.       |
-| `PLAYLIST_1_URI`            | Spotify URI for the first playlist.                      |
-| `PLAYLIST_2_URI`            | Spotify URI for the second playlist.                     |
-| `PLAYLIST_3_URI`            | (Optional) Spotify URI for the third playlist.           |
+| `PLAYLIST_1_URI`            | Spotify URL for the first playlist.                      |
+| `PLAYLIST_2_URI`            | Spotify URL for the second playlist.                     |
+| `PLAYLIST_3_URI`            | (Optional) Spotify URL for the third playlist.           |
 | `SWAP_PLAYLISTS_REDEMPTION` | Name of the channel point redemption for swapping playlists. |
 | `SONG_REQUEST_REDEMPTION`   | Name of the channel point redemption for song requests.  |
 
@@ -125,7 +125,7 @@ If you want to test or modify the bot locally:
 
 ### Swap Playlists
 
-When a viewer redeems the channel point for swapping playlists, the bot cycles through the predefined playlist URIs in the `.env` file.
+When a viewer redeems the channel point for swapping playlists, the bot cycles through the predefined playlist URLs in the `.env` file.
 
 ### Song Requests
 
