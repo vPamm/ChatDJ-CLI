@@ -1,10 +1,8 @@
 # ChatDJ 
 
-## THIS IS DEPRECATED. ALL DEVELOPMENT HAS MOVED TO https://github.com/vPamm/ChatDJ
+## THIS HAS BEEN DEPRECATED. https://chatdj.app
 
 A Twitch bot for managing Spotify playlists and handling song requests via channel point redemptions.
-
-[![Node.js CI](https://github.com/vPamm/ChatDJ/actions/workflows/node.js.yml/badge.svg?branch=main)](https://github.com/vPamm/ChatDJ/actions/workflows/node.js.yml)
 
 ## Features
 
